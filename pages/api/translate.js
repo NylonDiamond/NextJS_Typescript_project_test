@@ -22,7 +22,7 @@ const doTranslation = async function(googleTranslate, textToTranslate) {
 //   });
 // };
 
-export default async (req, res) => {
+export default async function handle(req, res) {
   if (req.method === "POST") {
     const apiKey = process.env.googleTranslateApiKey;
     const textToTranslate = await JSON.parse(req.body).textToTranslate;
