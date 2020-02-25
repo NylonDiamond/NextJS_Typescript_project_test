@@ -1,4 +1,5 @@
 var gTranslate = require("google-translate");
+var morgan = require("morgan");
 
 const doTranslation = async function(googleTranslate, textToTranslate) {
   return new Promise(function(resolve, reject) {
