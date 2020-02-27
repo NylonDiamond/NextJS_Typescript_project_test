@@ -1,7 +1,7 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
+
     {
       "type": "chrome",
       "request": "launch",
@@ -16,23 +16,10 @@
       "runtimeExecutable": "${workspaceFolder}/node_modules/next/dist/bin/next",
     //   "runtimeArgs": ["--inspect"],
       "port": 9229,
-    //   "env": {
-    //     "NODE_OPTIONS": "--inspect-brk"
-    // },
-    "env": {
-      "NODE_OPTIONS": "--inspect=127.0.0.1:9229 run dev"
-  },
-      "console": "integratedTerminal"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch via NPM",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/next",
-      "port": 9229,
       "env": {
-        "NODE_OPTIONS": "--inspect"
-      }
+        "NODE_OPTIONS": "--inspect-brk"
+    },
+      "console": "integratedTerminal"
     }
   ],
   "compounds": [

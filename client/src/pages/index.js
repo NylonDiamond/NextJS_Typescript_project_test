@@ -1,7 +1,5 @@
 import Head from "next/head"; //built-in component for appending elements to the head of the page:
 import PizzaReview from "../pages/pizzaReview.js";
-import Link from "next/link";
-import Header from "../components/Header.js";
 import MyLayout from "../components/MyLayout.js";
 // import uuid from 'uuid/v1'
 // import LogRocket from 'logrocket';
@@ -20,7 +18,6 @@ import MyLayout from "../components/MyLayout.js";
 const Home = () => (
   <div className="container">
     <Head>
-      <MyLayout />
       <title>Create Next App</title>
       <link rel="icon" href="/favicon.ico" />
       <link
@@ -30,7 +27,9 @@ const Home = () => (
         crossOrigin="anonymous"
       />
     </Head>
-
+    <header>
+      <MyLayout />
+    </header>
     <main>
       <h1>This is the HOME PAGE</h1>
       {/* Bootstrap js stuff */}

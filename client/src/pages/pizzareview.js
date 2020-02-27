@@ -1,17 +1,17 @@
 import Head from "next/head";
 import MyLayout from "../components/MyLayout.js";
-import YouTubePlayer from 'youtube-player';
+import YouTubePlayer from "youtube-player";
 
 let player;
- 
+
 // player = YouTubePlayer("video-player");
- 
+
 // 'loadVideoById' is queued until the player is ready to receive API calls.
 // player.loadVideoById('M7lc1UVf-VE');
- 
+
 // 'playVideo' is queue until the player is ready to received API calls and after 'loadVideoById' has been called.
 // player.playVideo();
- 
+
 // 'stopVideo' is queued after 'playVideo'.
 // player
 //     .stopVideo()
@@ -19,13 +19,13 @@ let player;
 //         // Every function returns a promise that is resolved after the target function has been executed.
 //     });
 
-
 export default function Index() {
   return (
-    <div>
-      <Head>
+    <div className="container">
+      <Head></Head>
+      <header>
         <MyLayout />
-      </Head>
+      </header>
       <main>
         <p>It's Pizza Time BABY!</p>
         <iframe
