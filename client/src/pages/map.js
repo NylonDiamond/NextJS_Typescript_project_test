@@ -17,10 +17,7 @@ const Map = () => {
 
   return (
     <div className="container">
-      <Head></Head>
-      <header>
-        <MyLayout />
-      </header>
+      {/* <Head></Head> */}
 
       <ReactMapGL
         {...viewport}

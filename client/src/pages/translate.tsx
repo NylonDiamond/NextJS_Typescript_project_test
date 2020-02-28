@@ -1,11 +1,11 @@
-import Head from "next/head";
 import MyLayout from "../components/MyLayout";
 import fetch from "isomorphic-unfetch";
-import react, { Component, Reducer } from "react";
+import react, { useState, useEffect } from "react"; // useState is a react HOOK! woo
 import TranslationsAPI from "../otherStuffNotReact/API";
 import _ from "lodash";
-import { isThrowStatement } from "typescript";
 import React from "react";
+import { Row, Col, Button } from "react-bootstrap";
+import PreviousTranslations from "../components/PreviousTranslations";
 
 // interface MyProps {
 
@@ -20,39 +20,55 @@ interface MyState {
   allTrans: [];
 }
 
-function fetcher(url: RequestInfo) {
-  return fetch(url).then(r => r.json());
-}
-
 // typescript stuff for this class and above : https://stackoverflow.com/questions/47561848/property-value-does-not-exist-on-type-readonly
 // https://nextjs.org/docs/basic-features/data-fetching
-class translate extends react.Component<{}, MyState> {
-  constructor(props: Readonly<{}>) {
-    super(props);
-    this.state = {
-      input: "",
-      submit: "",
-      isLoaded: false,
-      error: null,
-      translatedText: "",
-      allTrans: []
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const translate = props => {
+  // constructor(props: Readonly<{}>) {
+  //   super(props);
+  //   this.state = {
+  //     input: "",
+  //     submit: "",
+  //     isLoaded: false,
+  //     error: null,
+  //     translatedText: "",
+  //     allTrans: []
+  //   };
+  //   this.handleChange = this.handleChange.bind(this);
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  // }
 
-  handleChange(event: { target: { value: any } }) {
-    this.setState({
-      input: event.target.value
-    });
-  }
+  // react hook that gives you the state and a function to update the state.
+  // const [state, setState] = useState({
+  //   input: "",
+  //   submit: "",
+  //   translatedText: "",
+  //   allTrans: []
+  // });
+  // OLD WAY OF DOING IT ABOVE
+  const [input, setInput] = useState("");
+  const [submit, setSubmit] = useState("");
+  const [translatedText, setTranslatedText] = useState("");
+  const [allTrans, setAllTrans] = useState([]);
+
+  // const handleChange = (event: { target: { value: any } }) => {
+  //   setState({ ...state, input: event.target.value });
+  // }; // OLD WAY OF DOING IT ABOVE
+  const handleChange = (event: { target: { value: any } }) => {
+    setInput(event.target.value);
+  };
 
   // Next.js renders pages on server than sends them to the browser. getInitialProps is on server side, useEffect is on client side/browser. In your example getInitialProps triggers fetching on server. But useEffect fetches data on browser. You can fetch data before page loads via getInitialProps.But with useEffect fetching after page loading.
-  async componentDidMount() {
-    await this.updatePriorTrans();
-  }
+  // const componentDidMount = async () => {
+  //REPLACE THIS with useEffect() <<<<<<< NEW REACT HOOK FOR COMPOINENTDidMOUNT()!!!!!!!!!!!!!!
+  // const componentDidMount = async () => {
+  //   await updatePriorTrans();
+  // };
+  //AFTER the component has been rendered (show on screen) to the DOM, this will trigger/run. It also works a lil different. It runs more than once unlike componentDidMount(). It runs after any re-render by default (when props or state changes you'll get a re-render).
+  useEffect(() => {
+    updatePriorTrans(); // call api
+  }, [translatedText]); // second parameter is empty array. Tells to only run again when 'empty array state changes'. Never will happen
 
-  async updatePriorTrans() {
+  const updatePriorTrans = async () => {
     try {
       const data = await TranslationsAPI.getPreviousTranslations();
       const liTrans = data.map(
@@ -62,63 +78,87 @@ class translate extends react.Component<{}, MyState> {
           toText: react.ReactNode;
         }) => (
           <li key={item._id}>
-            {item.fromText} >>> {item.toText}
+            <p style={{ display: "inline", color: "#751414" }}>
+              {item.fromText}
+            </p>{" "}
+            >>>{" "}
+            <p style={{ display: "inline", color: "#40824e" }}>{item.toText}</p>
           </li>
         )
       );
-      this.setState({ allTrans: liTrans });
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  handleDelete = async () =>{
-    try {
-      const response = await TranslationsAPI.deleteAllTranslations();
-      if(response.status === "success"){
-        await this.updatePriorTrans();
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  handleSubmit = async () => {
-    try {
-      const data = await TranslationsAPI.doTranslation({
-        textToTranslate: this.state.input
-      });
-      this.setState(() => {
-        return {
-          translatedText: data,
-          input: ''
-        };
-      });
-      await this.updatePriorTrans();
+      setAllTrans(liTrans);
     } catch (err) {
       console.log(err);
     }
   };
 
-  render() {
-    return (
-      <div className="container">
-        {/* <Head></Head> */}
-        <MyLayout />
-        <textarea
-          style={{ height: 100, width: 333 }}
-          value={this.state.input}
-          onChange={this.handleChange}
-        ></textarea>
-        <button onClick={this.handleSubmit}>Translate!</button>
-        <h1>Translated state text: {this.state.translatedText}</h1>
-        <br />
-        <p>Recent Translations: <span className="pull-right"><button onClick={this.handleDelete} type="button" className="btn btn-danger">Delete All</button></span> </p>
+  // // componentDidUpdate(prevProps){
+  // //   this.fetch();
+  // // }
+  // useEffect(() => {
+  //   updatePriorTrans();
+  // }, [translatedText]);
 
-        <ul>{this.state.allTrans}</ul>
-      </div>
-    );
-  }
-}
+  const handleDelete = async () => {
+    try {
+      const response = await TranslationsAPI.deleteAllTranslations();
+      if (response.status === "success") {
+        await updatePriorTrans();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const data = await TranslationsAPI.doTranslation({
+        fromText: input,
+        toText: ""
+      });
+      setInput("");
+      setTranslatedText(data.toText);
+      // await updatePriorTrans();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <div className="container">
+      {/* <Head></Head> */}
+      <Row>
+        <Col>
+          <textarea
+            style={{ height: 200, width: "100%" }}
+            value={input}
+            onChange={handleChange}
+          ></textarea>{" "}
+          <Button variant="success" onClick={handleSubmit}>
+            Translate!
+          </Button>
+        </Col>
+        <Col>
+          <textarea
+            style={{ height: 200, width: "100%" }}
+            defaultValue={translatedText}
+          ></textarea>
+          <span className="pull-right">
+            <Button variant="danger" onClick={handleDelete}>
+              Delete All!
+            </Button>
+          </span>{" "}
+        </Col>
+      </Row>
+      <hr />
+      <Row className="justify-content-md-center">
+        <ul>
+          <h3>Recent Translations</h3>
+          {allTrans}
+        </ul>
+      </Row>
+    </div>
+  );
+};
 
 export default translate;

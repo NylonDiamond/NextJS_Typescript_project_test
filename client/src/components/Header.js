@@ -1,6 +1,13 @@
 import Link from "next/link";
-import Head from 'next/head';
-
+import Head from "next/head";
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button
+} from "react-bootstrap";
 const linkStyle = {
   marginRight: 15,
   color: "red",
@@ -8,30 +15,53 @@ const linkStyle = {
 };
 
 const Header = () => (
-  <div className="nav-scroller py-1 mb-2">
-      <Head>
-      <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossOrigin="anonymous"
-      />
-      </Head>
-    <nav className="nav d-flex justify-content-between">
-      <Link href="/">
-        <a style={linkStyle}>Home</a>
-      </Link>
-      <Link href="/pizzaReview">
-        <a style={linkStyle}>Pizza Reviews</a>
-      </Link>
-      <Link href="/translate">
-        <a style={linkStyle}>Translate</a>
-      </Link>
-      <Link href="/map">
-        <a style={linkStyle}>Map</a>
-      </Link>
-    </nav>
-    <style jsx>{`
+  <div>
+    <div>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">My Test App 🌮️</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link>
+              <Link href="/">
+                <a style={linkStyle}>Homepage</a>
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link href="/pizzaReview">
+                <a style={linkStyle}>Pizza</a>
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link href="/translate">
+                <a style={linkStyle}>Translate</a>
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link href="/map">
+                <a style={linkStyle}>Map</a>
+              </Link>
+            </Nav.Link>
+            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown> */}
+          </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
+    {/* <style jsx>{`
       .nav-scroller {
         position: relative;
         z-index: 2;
@@ -113,7 +143,7 @@ const Header = () => (
         cursor: pointer;
         text-decoration: underline;
       }
-    `}</style>
+    `}</style> */}
   </div>
 );
 

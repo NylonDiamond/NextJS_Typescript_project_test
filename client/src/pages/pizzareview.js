@@ -22,10 +22,7 @@ let player;
 export default function Index() {
   return (
     <div className="container">
-      <Head></Head>
-      <header>
-        <MyLayout />
-      </header>
+      {/* <Head></Head> */}
       <main>
         <p>It's Pizza Time BABY!</p>
         <iframe

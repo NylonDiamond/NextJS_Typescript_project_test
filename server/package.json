@@ -26,6 +26,7 @@
   "dependencies": {
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.2",
+    "@types/google-translate-api": "^2.3.0",
     "@types/helmet": "0.0.45",
     "@types/lodash": "^4.14.149",
     "@types/mongoose": "^5.7.2",

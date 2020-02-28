@@ -1,5 +1,6 @@
 import Head from "next/head"; //built-in component for appending elements to the head of the page:
 import PizzaReview from "../pages/pizzaReview.js";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import MyLayout from "../components/MyLayout.js";
 // import uuid from 'uuid/v1'
 // import LogRocket from 'logrocket';
@@ -20,20 +21,11 @@ const Home = () => (
     <Head>
       <title>Create Next App</title>
       <link rel="icon" href="/favicon.ico" />
-      <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossOrigin="anonymous"
-      />
     </Head>
-    <header>
-      <MyLayout />
-    </header>
     <main>
       <h1>This is the HOME PAGE</h1>
       {/* Bootstrap js stuff */}
-      <script
+      {/* <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossOrigin="anonymous"
@@ -47,7 +39,7 @@ const Home = () => (
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossOrigin="anonymous"
-      ></script>
+      ></script> */}
     </main>
 
     <footer>
@@ -61,7 +53,7 @@ const Home = () => (
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        /* align-items: center; */
       }
 
       main {

@@ -15,7 +15,8 @@ router.get("/", async (_req: any, res: any, next: any) => {
 
 router.post("/", async (req: any, res: any, next: any) => {
   try {
-    await translation_database.saveTranslation(req, res);
+    const text = req.body;
+    await translation_database.saveTranslation(req, res, text);
     res.json("Success");
   } catch (err) {
     next(err);
@@ -24,10 +25,9 @@ router.post("/", async (req: any, res: any, next: any) => {
 
 router.post("/translate", async (req: any, res: any, next: any) => {
   try {
-    const text = req.body.textToTranslate;
-    const translated = await handleTranslation(text);
+    const translated = await handleTranslation(req.body);
     await translation_database.saveTranslation(req, res, translated);
-    res.json(translated.toText);
+    res.json(translated);
   } catch (err) {
     err.name === "ValidationError" ? res.status(422) : "";
     next(err);
@@ -37,18 +37,10 @@ router.post("/translate", async (req: any, res: any, next: any) => {
 router.delete("/", async (_req: any, res: any, next: any) => {
   try {
     await Translations.remove({});
-    res.json({status: "success"});
+    res.json({ status: "success" });
   } catch (err) {
     next(err);
   }
 });
 
 export default router;
-router.get("/", async (_req: any, res: any, next: any) => {
-  try {
-    const allTranslations = await Translations.find();
-    res.json(allTranslations);
-  } catch (err) {
-    next(err);
-  }
-});
