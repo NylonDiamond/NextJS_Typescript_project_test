@@ -5,6 +5,9 @@
   --bg-primary: "#23232e";
   --bg-secondary: "#141418";
 }
+.app_main {
+  background-image: url("./0fd21758eb44841974b0dada1f86bf8f.jpg");
+}
 main > .container {
   /* padding: 60px 15px 0;  */
   display: flex;
@@ -39,9 +42,37 @@ main {
   margin: 0 1.5rem;
   transition: width 200ms ease;
 }
+.translate-box {
+  padding: 20px;
+  margin: 10px;
+  -moz-border-radius-topleft: 12px;
+  -moz-border-radius-topright: 12px;
+  -moz-border-radius-bottomleft: 11px;
+  -moz-border-radius-bottomright: 13px;
+  -webkit-border-top-left-radius: 12px;
+  -webkit-border-top-right-radius: 12px;
+  -webkit-border-bottom-left-radius: 11px;
+  -webkit-border-bottom-right-radius: 13px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 13px;
+  -moz-box-shadow: 7px 7px 7px #941994;
+  -webkit-box-shadow: 7px 7px 7px #941994;
+  box-shadow: 7px 7px 7px #941994;
+  background-color: white !important;
+  /* background: transparent !important; */
+  /* color: black; */
+  height: 200px !important;
+  width: 100% !important;
+  /* box-shadow: 0 0 10px pink !important;
+  box-shadow: 33 55 5px black !important; */
+  /* opacity: 0.3; */
+}
 /* #basic-navbar-nav > div > div:nth-child(1) > a > span > svg */
 .navigationBar {
   height: 3rem;
+  fill-opacity: 50%;
 }
 #basic-navbar-nav > div > div > a > span:hover {
   color: #f3e9d2;
@@ -50,7 +81,7 @@ main {
 }
 
 #basic-navbar-nav > div > div > a > span {
-  color: #88d498;
+  color: #d9688d;
   /* float: left; */
   /* text-align: center; */
 }

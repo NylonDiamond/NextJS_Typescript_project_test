@@ -4,7 +4,7 @@ import react, { useState, useEffect } from "react"; // useState is a react HOOK!
 import TranslationsAPI from "../otherStuffNotReact/API";
 import _ from "lodash";
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Form } from "react-bootstrap";
 import PreviousTranslations from "../components/PreviousTranslations";
 import { fas, faTrashAlt, faLanguage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -135,31 +135,46 @@ const translate = props => {
       <Row>
         <Col>
           {/* https://stackoverflow.com/questions/33211672/how-to-submit-a-form-using-enter-key-in-react-js */}
-          <form onSubmit={handleSubmit}>
-            <textarea
-              style={{ height: 200, width: "100%" }}
-              value={input}
-              onChange={e => setInput(e.target.value)}></textarea>{" "}
-            <Button type="submit" variant="success">
-              <span>
-                Translate <FontAwesomeIcon icon={faLanguage} />
-              </span>
-            </Button>
-          </form>
-        </Col>
-        <Col>
-          <div className="justify-content-center">
-            <textarea
-              style={{ height: 200, width: "100%" }}
-              defaultValue={translatedText}></textarea>
-            <span className="pull-right">
-              <Button variant="danger" onClick={handleDelete}>
+          <Form noValidate onSubmit={handleSubmit}>
+            <Form.Group controlId="123">
+              {/* <Form.Label>Example textarea</Form.Label> */}
+              <Form.Control
+                as="textarea"
+                rows="3"
+                className="translate-box"
+                value={input}
+                onChange={e => setInput(e.currentTarget.value)}
+                placeHolder="Translate something..."
+              />
+              <Button type="submit" variant="success">
                 <span>
-                  Delete All <FontAwesomeIcon icon={faTrashAlt} />
+                  Translate <FontAwesomeIcon icon={faLanguage} />
                 </span>
               </Button>
-            </span>{" "}
-          </div>
+            </Form.Group>
+          </Form>
+        </Col>
+        <Col>
+          <Form>
+            <Form.Group controlId="123">
+              {/* <Form.Label>Example textarea</Form.Label> */}
+              <Form.Control
+                placeHolder="Translation will show here"
+                as="textarea"
+                rows="3"
+                className="translate-box"
+                defaultValue={translatedText}
+                value={translatedText}
+              />
+              <span className="pull-right">
+                <Button variant="danger" onClick={handleDelete}>
+                  <span>
+                    Delete All <FontAwesomeIcon icon={faTrashAlt} />
+                  </span>
+                </Button>
+              </span>
+            </Form.Group>
+          </Form>
         </Col>
       </Row>
       <hr />

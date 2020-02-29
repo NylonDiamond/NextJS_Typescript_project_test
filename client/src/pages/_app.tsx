@@ -1,20 +1,7 @@
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import React from "react";
-// import MyLayout from "../components/MyLayout";
-// //https://github.com/zeit/next.js/issues/10059
-// export default function MyApp({ Component, pageProps }) {
-//   return (
-//     <MyLayout>
-//       <Component {...pageProps} />
-//     </MyLayout>
-//   );
-// }
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import "../App.css";
+import "../public/App.css";
 import Header from "../components/Header";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
@@ -99,7 +86,7 @@ export default function MyApp({ Component, pageProps }) {
       <main
         role="main"
         style={{ backgroundColor: "#F3E9D2" }}
-        className="flex-shrink-0">
+        className="app_main flex-shrink-0">
         <div className="container">
           <Component {...pageProps} />
         </div>
