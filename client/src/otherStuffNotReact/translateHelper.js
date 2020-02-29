@@ -7,13 +7,12 @@ import gTranslate from "google-translate";
 
 export default function TranslateWorker() {
   var googleTranslate = gTranslate(apiKey, {});
-    googleTranslate.translate("My name is Brandon", "es", function(
-      err,
-      translation
-    ) {
-      console.log(translation.translatedText);
-    });
- 
+  googleTranslate.translate("My name is Brandon", "es", function(
+    err,
+    translation
+  ) {
+    console.log(translation.translatedText);
+  });
 }
 
 let translatedText = googleTranslate.translate(

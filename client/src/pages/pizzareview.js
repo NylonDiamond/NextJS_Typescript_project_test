@@ -1,5 +1,5 @@
 import Head from "next/head";
-import MyLayout from "../components/MyLayout.js";
+
 import YouTubePlayer from "youtube-player";
 
 let player;

@@ -6,6 +6,8 @@ import _ from "lodash";
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import PreviousTranslations from "../components/PreviousTranslations";
+import { fas, faTrashAlt, faLanguage } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // interface MyProps {
 
@@ -49,13 +51,14 @@ const translate = props => {
   const [submit, setSubmit] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [allTrans, setAllTrans] = useState([]);
+  const [previousTranslations, setPreviousTranslations] = useState([]);
 
   // const handleChange = (event: { target: { value: any } }) => {
   //   setState({ ...state, input: event.target.value });
   // }; // OLD WAY OF DOING IT ABOVE
-  const handleChange = (event: { target: { value: any } }) => {
-    setInput(event.target.value);
-  };
+  // const handleChange = (event: { target: { value: any } }) => {
+  //   setInput(event.target.value);
+  // };
 
   // Next.js renders pages on server than sends them to the browser. getInitialProps is on server side, useEffect is on client side/browser. In your example getInitialProps triggers fetching on server. But useEffect fetches data on browser. You can fetch data before page loads via getInitialProps.But with useEffect fetching after page loading.
   // const componentDidMount = async () => {
@@ -70,8 +73,8 @@ const translate = props => {
 
   const updatePriorTrans = async () => {
     try {
-      const data = await TranslationsAPI.getPreviousTranslations();
-      const liTrans = data.map(
+      const previousTranslations = await TranslationsAPI.getPreviousTranslations();
+      const liTrans = previousTranslations.map(
         (item: {
           _id: react.ReactText;
           fromText: react.ReactNode;
@@ -86,7 +89,7 @@ const translate = props => {
           </li>
         )
       );
-      setAllTrans(liTrans);
+      setPreviousTranslations(liTrans);
     } catch (err) {
       console.log(err);
     }
@@ -110,54 +113,67 @@ const translate = props => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async event => {
     try {
+      event.preventDefault();
+      event.stopPropagation();
       const data = await TranslationsAPI.doTranslation({
         fromText: input,
         toText: ""
       });
       setInput("");
       setTranslatedText(data.toText);
-      // await updatePriorTrans();
+      await updatePriorTrans();
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div className="container">
+    <main>
       {/* <Head></Head> */}
       <Row>
         <Col>
-          <textarea
-            style={{ height: 200, width: "100%" }}
-            value={input}
-            onChange={handleChange}
-          ></textarea>{" "}
-          <Button variant="success" onClick={handleSubmit}>
-            Translate!
-          </Button>
+          {/* https://stackoverflow.com/questions/33211672/how-to-submit-a-form-using-enter-key-in-react-js */}
+          <form onSubmit={handleSubmit}>
+            <textarea
+              style={{ height: 200, width: "100%" }}
+              value={input}
+              onChange={e => setInput(e.target.value)}></textarea>{" "}
+            <Button type="submit" variant="success">
+              <span>
+                Translate <FontAwesomeIcon icon={faLanguage} />
+              </span>
+            </Button>
+          </form>
         </Col>
         <Col>
-          <textarea
-            style={{ height: 200, width: "100%" }}
-            defaultValue={translatedText}
-          ></textarea>
-          <span className="pull-right">
-            <Button variant="danger" onClick={handleDelete}>
-              Delete All!
-            </Button>
-          </span>{" "}
+          <div className="justify-content-center">
+            <textarea
+              style={{ height: 200, width: "100%" }}
+              defaultValue={translatedText}></textarea>
+            <span className="pull-right">
+              <Button variant="danger" onClick={handleDelete}>
+                <span>
+                  Delete All <FontAwesomeIcon icon={faTrashAlt} />
+                </span>
+              </Button>
+            </span>{" "}
+          </div>
         </Col>
       </Row>
       <hr />
       <Row className="justify-content-md-center">
         <ul>
-          <h3>Recent Translations</h3>
-          {allTrans}
+          {/* <h3>Recent Translations</h3> */}
+          {/* {allTrans} */}
+          {/* conditional rendering depending on array length */}
+          {previousTranslations.length === 0 && <p>"No old translations!"</p>}
+          {previousTranslations}
+          {/* <PreviousTranslations previousTranslations={previousTranslations} /> */}
         </ul>
       </Row>
-    </div>
+    </main>
   );
 };
 
