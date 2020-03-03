@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import "../public/App.css";
-import Header from "../components/Header";
+import Header from "../components/customheader";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
@@ -23,6 +23,7 @@ library.add(
   faMapMarkedAlt,
   faChalkboardTeacher
 );
+import PizzaMouse from "../components/pizzamouse";
 import expressImage from "../public/static/0fd21758eb44841974b0dada1f86bf8f.jpg";
 const styleBackground = {
   background: expressImage
@@ -31,6 +32,7 @@ const styleBackground = {
 export default function MyApp({ Component, pageProps }) {
   return (
     <div className="all-content">
+      {/* <PizzaMouse className="pizza-mouse" /> */}
       <header>
         <Header />
       </header>

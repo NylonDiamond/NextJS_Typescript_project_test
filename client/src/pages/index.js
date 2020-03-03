@@ -24,9 +24,9 @@
 // export default Home;
 
 // import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./_app";
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import App from "./_app";
 import { Row, Image, Col, Jumbotron } from "react-bootstrap";
 // ReactDOM.render(<App />, document.getElementById("root"));
 import nextImage from "../public/static/1280px-Nextjs-logo.svg.png";

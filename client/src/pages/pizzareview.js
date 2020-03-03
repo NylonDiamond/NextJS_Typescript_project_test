@@ -2,10 +2,10 @@ import Head from "next/head";
 
 import YouTubePlayer from "youtube-player";
 import { Row } from "react-bootstrap";
-import apiHelper from "../otherStuffNotReact/API";
+import apiHelper from "../utils/api";
 let player;
 import { useState, useEffect } from "react";
-
+import PizzaMouse from "../components/pizzamouse";
 // player = YouTubePlayer("video-player");
 
 // 'loadVideoById' is queued until the player is ready to receive API calls.
@@ -37,16 +37,20 @@ export default function Index() {
     // return videos.map(video => {});
   };
   return (
-    <Row className="justify-content-md-center">
-      {/* <p>It's Pizza Time BABY!</p> */}
-      <iframe
-        id="ytplayer"
-        type="text/html"
-        width="640"
-        height="360"
-        src="https://www.youtube.com/embed?listType=playlist&list=PLx00VbyG3uL8GpxpExmdKTM7maCSXGdSm"
-        frameBorder="0"></iframe>
-      {/* <iframe>{player.loadVideoById('M7lc1UVf-VE')}</iframe> */}
-    </Row>
+    <>
+      {/* <PizzaMouse /> */}
+      <Row className="justify-content-md-center">
+        {/* <p>It's Pizza Time BABY!</p> */}
+        <iframe
+          id="ytplayer"
+          type="text/html"
+          width="640"
+          height="360"
+          src="https://www.youtube.com/embed?listType=playlist&list=PLx00VbyG3uL8GpxpExmdKTM7maCSXGdSm"
+          frameBorder="0"></iframe>
+        {/* <iframe>{player.loadVideoById('M7lc1UVf-VE')}</iframe> */}{" "}
+        {/* <PizzaMouse /> */}
+      </Row>
+    </>
   );
 }

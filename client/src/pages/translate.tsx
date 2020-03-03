@@ -1,11 +1,11 @@
-import MyLayout from "../components/MyLayout";
+// import MyLayout from "../components/mylayout";
 import fetch from "isomorphic-unfetch";
 import react, { useState, useEffect } from "react"; // useState is a react HOOK! woo
-import TranslationsAPI from "../otherStuffNotReact/API";
+import TranslationsAPI from "../utils/api";
 import _ from "lodash";
 import React from "react";
-import { Row, Col, Button, Form } from "react-bootstrap";
-import PreviousTranslations from "../components/PreviousTranslations";
+import { Row, Col, Button, Form, Container } from "react-bootstrap";
+// import PreviousTranslations from "../components/previoustranslations";
 import {
   fas,
   faTrashAlt,
@@ -194,8 +194,8 @@ const translate = props => {
           </Form>
         </Col>
       </Row>
-      <hr />
 
+      <hr />
       <div className="old-translations">
         <Row className="justify-content-md-center">
           {" "}
@@ -209,6 +209,12 @@ const translate = props => {
           </ul>
         </Row>
       </div>
+      <Row>
+        <Col md={{ span: 3, offset: 9 }}>
+          {" "}
+          <h6 style={{ alignItems: "right" }}>* Using Google Translate API</h6>
+        </Col>
+      </Row>
     </>
   );
 };

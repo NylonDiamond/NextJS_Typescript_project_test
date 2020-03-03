@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Head from "next/head";
+// import Head from "next/head";
 import { Navbar, Nav } from "react-bootstrap";
 import { CSSProperties } from "react";
 const linkStyle: CSSProperties = {
@@ -43,7 +43,7 @@ const Header = () => (
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
-                <Link href="/pizzaReview">
+                <Link href="/pizzareview">
                   <span>
                     Pizza <FontAwesomeIcon icon={faPizzaSlice} />
                   </span>
@@ -52,7 +52,7 @@ const Header = () => (
             </Nav.Item>
             <Nav.Item>
               <Nav.Link>
-                <Link href="/Translate">
+                <Link href="/translate">
                   <span>
                     Translate <FontAwesomeIcon icon={faLanguage} />
                   </span>

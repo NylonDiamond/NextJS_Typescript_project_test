@@ -1,4 +1,4 @@
-import TranslationsAPI from "../otherStuffNotReact/API";
+// import TranslationsAPI from "../otherStuffNotReact/api";
 import react, { useEffect } from "react";
 
 export default (props: any) => {
