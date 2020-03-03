@@ -1,8 +1,10 @@
 import Head from "next/head";
 
 import YouTubePlayer from "youtube-player";
-
+import { Row } from "react-bootstrap";
+import apiHelper from "../otherStuffNotReact/API";
 let player;
+import { useState, useEffect } from "react";
 
 // player = YouTubePlayer("video-player");
 
@@ -20,22 +22,31 @@ let player;
 //     });
 
 export default function Index() {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    getVideos();
+  }, []);
+  const getVideos = async () => {
+    const videosHtml = await apiHelper.getVideos();
+    return videosHtml;
+    // var parser = new DOMParser();
+    // var doc = parser.parseFromString(videosHtml, "text/html");
+    // const arrayVideos = doc.querySelectorAll(".yt-simple-endpoint[href]");
+    // console.log(arrayVideos);
+    // return videos.map(video => {});
+  };
   return (
-    <div className="container">
-      {/* <Head></Head> */}
-      <main>
-        <p>It's Pizza Time BABY!</p>
-        <iframe
-          id="ytplayer"
-          type="text/html"
-          width="640"
-          height="360"
-          src="https://www.youtube.com/embed?listType=playlist&list=PLx00VbyG3uL8GpxpExmdKTM7maCSXGdSm"
-          frameBorder="0"
-        ></iframe>
-        {/* <iframe>{player.loadVideoById('M7lc1UVf-VE')}</iframe> */}
-      </main>
-      <footer></footer>
-    </div>
+    <Row className="justify-content-md-center">
+      {/* <p>It's Pizza Time BABY!</p> */}
+      <iframe
+        id="ytplayer"
+        type="text/html"
+        width="640"
+        height="360"
+        src="https://www.youtube.com/embed?listType=playlist&list=PLx00VbyG3uL8GpxpExmdKTM7maCSXGdSm"
+        frameBorder="0"></iframe>
+      {/* <iframe>{player.loadVideoById('M7lc1UVf-VE')}</iframe> */}
+    </Row>
   );
 }

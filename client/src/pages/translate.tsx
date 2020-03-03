@@ -6,7 +6,12 @@ import _ from "lodash";
 import React from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import PreviousTranslations from "../components/PreviousTranslations";
-import { fas, faTrashAlt, faLanguage } from "@fortawesome/free-solid-svg-icons";
+import {
+  fas,
+  faTrashAlt,
+  faLanguage,
+  faGlobeAmericas
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // interface MyProps {
@@ -80,12 +85,24 @@ const translate = props => {
           fromText: react.ReactNode;
           toText: react.ReactNode;
         }) => (
-          <li key={item._id}>
-            <p style={{ display: "inline", color: "#751414" }}>
+          <li className="each-trans" key={item._id}>
+            <p
+              style={{
+                display: "inline",
+                color: "#c028d4"
+              }}>
               {item.fromText}
-            </p>{" "}
-            >>>{" "}
-            <p style={{ display: "inline", color: "#40824e" }}>{item.toText}</p>
+            </p>
+            {"  "}
+            <FontAwesomeIcon icon={faGlobeAmericas} />
+            {"  "}
+            <p
+              style={{
+                display: "inline",
+                color: "#39fc03"
+              }}>
+              {item.toText}
+            </p>
           </li>
         )
       );
@@ -130,9 +147,9 @@ const translate = props => {
   };
 
   return (
-    <main>
+    <>
       {/* <Head></Head> */}
-      <Row>
+      <Row className="justify-content-md-center">
         <Col>
           {/* https://stackoverflow.com/questions/33211672/how-to-submit-a-form-using-enter-key-in-react-js */}
           <Form noValidate onSubmit={handleSubmit}>
@@ -140,11 +157,11 @@ const translate = props => {
               {/* <Form.Label>Example textarea</Form.Label> */}
               <Form.Control
                 as="textarea"
-                rows="3"
+                rows="6"
                 className="translate-box"
                 value={input}
                 onChange={e => setInput(e.currentTarget.value)}
-                placeHolder="Translate something..."
+                placeholder="Translate something..."
               />
               <Button type="submit" variant="success">
                 <span>
@@ -159,11 +176,11 @@ const translate = props => {
             <Form.Group controlId="123">
               {/* <Form.Label>Example textarea</Form.Label> */}
               <Form.Control
-                placeHolder="Translation will show here"
+                placeholder="Translation will show here"
                 as="textarea"
-                rows="3"
+                rows="6"
                 className="translate-box"
-                defaultValue={translatedText}
+                readOnly={true}
                 value={translatedText}
               />
               <span className="pull-right">
@@ -178,17 +195,21 @@ const translate = props => {
         </Col>
       </Row>
       <hr />
-      <Row className="justify-content-md-center">
-        <ul>
-          {/* <h3>Recent Translations</h3> */}
-          {/* {allTrans} */}
-          {/* conditional rendering depending on array length */}
-          {previousTranslations.length === 0 && <p>"No old translations!"</p>}
-          {previousTranslations}
-          {/* <PreviousTranslations previousTranslations={previousTranslations} /> */}
-        </ul>
-      </Row>
-    </main>
+
+      <div className="old-translations">
+        <Row className="justify-content-md-center">
+          {" "}
+          {/* <h3 style={{ alignItems: "center" }}>Previous Translations</h3> */}
+          <ul style={{ alignItems: "center" }}>
+            {/* {allTrans} */}
+            {/* conditional rendering depending on array length */}
+            {previousTranslations.length === 0 && <p>"No old translations!"</p>}
+            {previousTranslations}
+            {/* <PreviousTranslations previousTranslations={previousTranslations} /> */}
+          </ul>
+        </Row>
+      </div>
+    </>
   );
 };
 

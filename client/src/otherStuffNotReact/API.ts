@@ -10,6 +10,28 @@ async function getPreviousTranslations() {
   }
 }
 
+var requestOptions = {
+  method: "GET",
+  redirect: "follow"
+};
+
+async function getVideos() {
+  try {
+    const response = await fetch(
+      "https://www.googleapis.com/youtube/v3/videos",
+      {
+        method: "GET",
+        redirect: "follow"
+      }
+    );
+    console.log(response);
+    // return response.json();
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function deleteAllTranslations() {
   try {
     const response = await fetch(`${API_URL}/api/translations`, {
@@ -58,5 +80,6 @@ export default {
   getPreviousTranslations,
   saveTranslation,
   doTranslation,
-  deleteAllTranslations
+  deleteAllTranslations,
+  getVideos
 };

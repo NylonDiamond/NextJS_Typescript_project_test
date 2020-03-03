@@ -6,7 +6,11 @@ import translation_database from "../helpers/translation_database";
 
 router.get("/", async (_req: any, res: any, next: any) => {
   try {
-    const allTranslations = await Translations.find();
+    const allTranslations = await Translations.find(
+      {},
+      {},
+      { sort: { createdAt: -1 } }
+    ).limit(15);
     res.json(allTranslations);
   } catch (err) {
     next(err);

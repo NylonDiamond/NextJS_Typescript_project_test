@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../public/App.css";
 import Header from "../components/Header";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -13,6 +13,7 @@ import {
   faMapMarkedAlt,
   faChalkboardTeacher
 } from "@fortawesome/free-solid-svg-icons";
+import { Container, Row } from "react-bootstrap";
 library.add(
   faLanguage,
   faMapMarkerAlt,
@@ -22,93 +23,43 @@ library.add(
   faMapMarkedAlt,
   faChalkboardTeacher
 );
-
+import expressImage from "../public/static/0fd21758eb44841974b0dada1f86bf8f.jpg";
+const styleBackground = {
+  background: expressImage
+};
 //https://github.com/zeit/next.js/issues/10059
 export default function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div className="all-content">
       <header>
-        {/* Fixed navbar */}
-        {/* <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-          <a className="navbar-brand" href="/">
-            Fixed navbar
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarCollapse"
-            aria-controls="navbarCollapse"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarCollapse">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="/">
-                  Home <span className="sr-only">(current)</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/">
-                  Link
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link disabled"
-                  href="/"
-                  tabIndex={-1}
-                  aria-disabled="true">
-                  Disabled
-                </a>
-              </li>
-            </ul>
-            <form className="form-inline mt-2 mt-md-0">
-              <input
-                className="form-control mr-sm-2"
-                type="text"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-                className="btn btn-outline-success my-2 my-sm-0"
-                type="submit">
-                Search
-              </button>
-            </form>
-          </div>
-        </nav> */}
         <Header />
       </header>
       {/* Begin page content */}
       <main
         role="main"
-        style={{ backgroundColor: "#F3E9D2" }}
-        className="app_main flex-shrink-0">
-        <div className="container">
+        className="app_main flex-shrink-0"
+        style={{ background: `url(${expressImage})` }}>
+        <Container style={{ marginTop: "20px" }}>
           <Component {...pageProps} />
-        </div>
+        </Container>
       </main>
-      <footer className="footer mt-auto py-3 bg-dark text-white">
-        <div className="container">
-          Powered my really important computer stuff.
-        </div>
-      </footer>
-      <style jsx>{`main > .container {
-  /* padding: 60px 15px 0;  */
-  display: flex;
-  min-height: 90vh;
-  flex-direction: column;
-}
-.Site-content {
-  flex: 1;
-}
-::-webkit-scrollbar {
-    width: 12px;
-}
->`}</style>
-    </>
+      <Row className="footer-container">
+        <footer className="footer">
+          {/* <div className="container"> */}
+          <h3>🙅‍♂️️ Powered my Me and a Computer 🖥️</h3>
+          {/* </div> */}
+        </footer>
+      </Row>{" "}
+    </div>
   );
 }
+
+// /html/body/ytd-app/div/ytd-page-manager/ytd-browse[2]/ytd-two-column-browse-results-renderer/div[1]/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-grid-renderer/div[1]/ytd-grid-video-renderer[1]
+
+// #items > ytd-grid-video-renderer
+
+// document.querySelector("#thumbnail")
+
+// #thumbnail
+
+//. style-scope ytd-grid-renderer > a > href
