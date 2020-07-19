@@ -21,7 +21,7 @@
     "fs": "0.0.1-security",
     "google-translate": "^3.0.0",
     "isomorphic-unfetch": "^3.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash.range": "^3.2.0",
     "logrocket": "^1.0.6",
     "mongoose": "^5.9.3",
